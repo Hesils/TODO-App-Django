@@ -12,7 +12,6 @@ class Task(models.Model):
     categorie = models.ForeignKey('Categorie', on_delete=models.CASCADE)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     
-
 class Categorie(models.Model):
     name = models.CharField(max_length=75, unique=True)
     slug = models.SlugField()

@@ -21,7 +21,7 @@
 
 ## Fonctionalités
 - [] Utilisateur
-    - [] Sign up
+    - [x] Sign up
     - [] Connection
     - [] Déconnection
     - [] Récuperation des catégories/taches de l'utilisateur
