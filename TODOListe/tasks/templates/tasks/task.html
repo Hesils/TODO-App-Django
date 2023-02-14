@@ -1,4 +1,10 @@
-<div>
+<form method="POST">
+    {% csrf_token %}
     <h3>{{task.name}}</h3>
     <p>{{task.description}}</p>
-</div>
+    <button hx-post="{% url 'delete_task' task.pk %}"
+        hx-target="closest form"
+        hx-swap="outerHTML"
+        type="submit"
+    >Supprimer</button>
+</form>

@@ -51,9 +51,7 @@
                     type="submit">Ajouter</button>
                 </form>
                 <div id="tasks-liste">
-                    {% for task in tasks%}
-                        <p>{{task.name}}: {{task.description}}</p>
-                    {% endfor %}
+                    {% include 'tasks/tasks.html' with tasks=tasks %}
                 </div>
             </div>
         </div>

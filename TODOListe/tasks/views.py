@@ -16,7 +16,7 @@ def index(request):
     context['tasks'] = categorie.task_set.all()
     return render(request, 'tasks/index.html', context=context)
 
-"""---------Task and categories views--------"""
+"""---------Categories views--------"""
 def add_categorie(request):
     name = request.POST.get('categorie_name')
     # default user:
@@ -26,6 +26,7 @@ def add_categorie(request):
         return HttpResponse("La categorie existe deja.", status=409)
     return render(request, 'tasks/categories.html', context={'categorie': categorie})
 
+"""---------Tasks views--------"""
 def add_task(request):
     name = request.POST.get('task_name')
     description = request.POST.get('task_description')
@@ -41,6 +42,12 @@ def get_tasks(request, categorie_pk):
     categorie = get_object_or_404(Categorie, pk=categorie_pk)
     tasks = categorie.task_set.order_by("name")
     return render(request, 'tasks/tasks.html', context={"tasks": tasks})
+
+def delete_task(request, task_pk):
+    print(request.POST)
+    task = get_object_or_404(Task, pk=task_pk)
+    task.delete()
+    return HttpResponse("")
 
 """---------User views--------"""
 

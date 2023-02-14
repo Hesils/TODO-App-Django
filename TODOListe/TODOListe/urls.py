@@ -19,13 +19,14 @@ from tasks import views as task_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home', task_views.index, name="home"),
+    path('home/', task_views.index, name="home"),
     path('', task_views.login, name="login_page"),
-    path('sign_in', task_views.sign_in, name="sign_in"),
-    path('sign_up', task_views.sign_up, name="sign_up"),
-    path('logout', task_views.logout, name="logout"),
-    path('add_user', task_views.add_user, name="add_user"),
-    path('add_categorie', task_views.add_categorie, name="add_categorie"),
-    path('add_task', task_views.add_task, name="add_task"),
+    path('sign_in/', task_views.sign_in, name="sign_in"),
+    path('sign_up/', task_views.sign_up, name="sign_up"),
+    path('logout/', task_views.logout, name="logout"),
+    path('add_user/', task_views.add_user, name="add_user"),
+    path('add_categorie/', task_views.add_categorie, name="add_categorie"),
+    path('add_task/', task_views.add_task, name="add_task"),
+    path('delete_task/<int:task_pk>', task_views.delete_task, name="delete_task"),
     path('get_task/<int:categorie_pk>', task_views.get_tasks, name="get_task"),
 ]

@@ -20,19 +20,17 @@
     - [x] user-fk
 
 ## Fonctionalités
-- [] Utilisateur
+- [x] Utilisateur
     - [x] Sign up
     - [x] Connection
     - [x] Déconnection
     - [x] Récuperation des catégories/taches de l'utilisateur
-- [] Taches
+- [x] Taches
     - [x] Ajouter une tache à une catégorie
-    - [] Modifier une tache
-    - [] Supprimer une tache
+    - [x] Supprimer une tache
 - [] Catégorie
     - [x] Ajouter une catégorie
         - [x] Impossible si catégorie éxiste déja
-    - [] Modifier une catégorie
     - [] Supprimer une catégorie
 - [x] Affichage
     - [x] Afficher la liste des catégories
