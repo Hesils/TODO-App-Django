@@ -1,0 +1,7 @@
+<button
+hx-get="get_task/{{categorie.pk}}"
+hx-target="#tasks-liste"
+hx-push-url="?categorie_pk={{categorie.pk}}"
+>
+{{categorie.name}}
+</button>

@@ -34,7 +34,7 @@
         - [x] Impossible si catégorie éxiste déja
     - [] Modifier une catégorie
     - [] Supprimer une catégorie
-- [] Affichage
+- [x] Affichage
     - [x] Afficher la liste des catégories
     - [x] Sélectionner une catégorie
         - [x] Afficher la liste de taches dans la catégorie 
