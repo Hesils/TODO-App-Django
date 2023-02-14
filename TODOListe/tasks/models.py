@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
 class User(models.Model):
@@ -19,9 +20,18 @@ class Task(models.Model):
         return self.name
     
 class Categorie(models.Model):
-    name = models.CharField(max_length=75, unique=True)
+    name = models.CharField(max_length=75)
     slug = models.SlugField()
     user = models.ForeignKey('User', on_delete=models.CASCADE)
 
+    @classmethod
+    def get_default_categorie(cls, user):
+        collection, _ = cls.objects.get_or_create(name="Defaut", slug="_defaut", user=user)
+        return collection
+
+    def save(self, *args, **kwargs):
+        self.slug = self.slug or slugify(self.name)
+        super().save(*args, **kwargs)
+    
     def __str__(self):
         return self.name

@@ -24,10 +24,9 @@
     - [x] Sign up
     - [x] Connection
     - [x] Déconnection
-    - [] Récuperation des catégories/taches de l'utilisateur
+    - [x] Récuperation des catégories/taches de l'utilisateur
 - [] Taches
-    - [] Ajouter une tache à une catégorie
-        - [] Impossible si doublon dans la catégorie
+    - [x] Ajouter une tache à une catégorie
     - [] Modifier une tache
     - [] Supprimer une tache
 - [] Catégorie
@@ -36,6 +35,6 @@
     - [] Modifier une catégorie
     - [] Supprimer une catégorie
 - [] Affichage
-    - [] Afficher la liste des catégories
-    - [] Sélectionner une catégorie
-        - [] Afficher la liste de taches dans la catégorie 
+    - [x] Afficher la liste des catégories
+    - [x] Sélectionner une catégorie
+        - [x] Afficher la liste de taches dans la catégorie 

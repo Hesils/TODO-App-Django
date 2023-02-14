@@ -24,7 +24,7 @@
             <h1>Ajout d'une catégorie</h1>
             <div id="categorie-liste">
                 {% for categorie in categories%}
-                    <h2>{{categorie}}</h2>
+                    <button hx-get="get_task/{{categorie.pk}}" hx-target="#tasks-liste">{{categorie}}</button>
                 {% endfor %}
             </div>
             <form method="POST">
@@ -35,6 +35,26 @@
                     hx-swap="beforeend"
                     type="submit">Ajouter</button>
             </form>
+            <div id="tasks">
+                <h2>Taches</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label for="task_name">Nom</label>
+                    <input type="text" name="task_name"/>
+                    <label for="task_description">Description</label>
+                    <input type="text" name="task_description"/>
+                    <button 
+                        hx-post="{% url 'add_task'%}"
+                        hx-target="#tasks-liste"
+                        hx-swap="beforeend"
+                    type="submit">Ajouter</button>
+                </form>
+                <div id="tasks-liste">
+                    {% for task in tasks%}
+                        <p>{{task.name}}: {{task.description}}</p>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
 
         <script>
