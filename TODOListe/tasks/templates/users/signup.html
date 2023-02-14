@@ -1,0 +1,15 @@
+<div id="signup">
+    <h1>Inscription</h1>        
+    <form method='POST'>
+        {%csrf_token%}
+        <label for='user_name'>Nom d'utilisateur</label>
+        <input type="text" name="user_name" require/>
+        <label for='user_password'>Mot de passe</label>
+        <input type="password" name="user_password" require/>
+        <label for='user_mail'>Adresse mail</label>
+        <input type="mail" name="user_mail" require/>
+        <button hx-post="{%url 'add_user' %}"
+            hx-target="#signup"
+            type='submit'>S'inscrire</button>
+    </form>
+</div>

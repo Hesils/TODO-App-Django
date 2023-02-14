@@ -5,13 +5,42 @@
         <title>TODO Liste</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://unpkg.com/htmx.org@1.8.5"></script>
     </head>
     <body>
-        <h1>Test</h1>
-        <form method="POST" action="{% url 'add_categorie' %}">
-            {% csrf_token %}
-            <input type="text" name="categorie_name" />
-            <button type="submit">Ajouter</button>
-        </form>
+        <div id="container">
+            <div id="user-bar">
+                <p>Bienvenu {{user.username}}</p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <button
+                        hx-post="{% url 'logout' %}" 
+                        hx-target="#container"
+                        type="submit"
+                    >Deconection</button>
+                </form>
+            </div>
+            <h1>Ajout d'une catégorie</h1>
+            <div id="categorie-liste">
+                {% for categorie in categories%}
+                    <h2>{{categorie}}</h2>
+                {% endfor %}
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" name="categorie_name" />
+                <button hx-post="{% url 'add_categorie' %}"
+                    hx-target="#categorie-liste"
+                    hx-swap="beforeend"
+                    type="submit">Ajouter</button>
+            </form>
+        </div>
+
+        <script>
+            document.body.addEventListener("htmx:responseError", function(e) {
+                alert(e.detail.xhr.responseText);
+            })
+        </script>
     </body>
 </html>

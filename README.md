@@ -22,8 +22,8 @@
 ## Fonctionalités
 - [] Utilisateur
     - [x] Sign up
-    - [] Connection
-    - [] Déconnection
+    - [x] Connection
+    - [x] Déconnection
     - [] Récuperation des catégories/taches de l'utilisateur
 - [] Taches
     - [] Ajouter une tache à une catégorie
@@ -31,8 +31,8 @@
     - [] Modifier une tache
     - [] Supprimer une tache
 - [] Catégorie
-    - [] Ajouter une catégorie
-        - [] Impossible si catégorie éxiste déja
+    - [x] Ajouter une catégorie
+        - [x] Impossible si catégorie éxiste déja
     - [] Modifier une catégorie
     - [] Supprimer une catégorie
 - [] Affichage

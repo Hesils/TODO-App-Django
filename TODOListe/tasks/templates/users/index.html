@@ -3,22 +3,40 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>TODO Users</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+
+        <script src="https://unpkg.com/htmx.org@1.8.5"></script>
     </head>
     <body>
-        <h1>Inscription</h1>        
-        <form method='POST' action="{%url 'add_user' %}">
-            {%csrf_token%}
-            <label for='user_name'>Nom d'utilisateur</label>
-            <input type="text" name="user_name" require/>
-            <label for='user_password'>Mot de passe</label>
-            <input type="password" name="user_password" require/>
-            <label for='user_mail'>Adresse mail</label>
-            <input type="mail" name="user_mail" require/>
-            <button type='submit'>S'inscrire</button>
-        </form>
+        <div id="userContainer">
+            <h1>Connection</h1>
+            <form method="POST">
+                {%csrf_token%}
+                <label for="username">Identifiant</label>
+                <input type="text" name="username"/>
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password"/>
+                <button hx-post="{% url 'sign_in' %}"
+                    hx-target="#userContainer"
+                    type="submit"
+                >
+                    Se connecter
+                </button>
+                <button hx-post="{% url 'sign_up' %}"
+                    hx-target="#userContainer"
+                    type="submit"
+                >
+                    S'inscrire
+                </button>
+            </form>
+        </div>
+
+        <script>
+            document.body.addEventListener("htmx:responseError", function(e) {
+                alert(e.detail.xhr.responseText);
+            })
+        </script>
     </body>
 </html>
