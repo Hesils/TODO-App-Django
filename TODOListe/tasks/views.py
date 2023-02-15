@@ -10,7 +10,6 @@ def index(request):
     context['categories'] = Categorie.objects.filter(user=context["user"]["pk"]).order_by("name")
     categorie_pk = request.GET.get("categorie_pk")
     categorie = Categorie.get_default_categorie(User.objects.get(pk=context["user"]["pk"]))
-    print(f"categorie pk : {categorie_pk}")
     if categorie_pk:
         categorie = get_object_or_404(Categorie, pk=categorie_pk, user=User.objects.get(pk=context["user"]["pk"]))
     context['tasks'] = categorie.task_set.all()
@@ -42,7 +41,7 @@ def add_task(request):
     if categorie_pk:
         categorie = Categorie.objects.get(pk=categorie_pk)
     task = Task.objects.create(name=name, description=description, categorie=categorie, user=user)
-    return render(request, 'tasks/task.html', context={'task': task})
+    return render(request, 'tasks/task.html', context={'task': task, "categorie": categorie})
 
 def get_tasks(request, categorie_pk):
     categorie = get_object_or_404(Categorie, pk=categorie_pk)

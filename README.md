@@ -28,10 +28,10 @@
 - [x] Taches
     - [x] Ajouter une tache à une catégorie
     - [x] Supprimer une tache
-- [] Catégorie
+- [x] Catégorie
     - [x] Ajouter une catégorie
         - [x] Impossible si catégorie éxiste déja
-    - [] Supprimer une catégorie
+    - [x] Supprimer une catégorie
 - [x] Affichage
     - [x] Afficher la liste des catégories
     - [x] Sélectionner une catégorie
