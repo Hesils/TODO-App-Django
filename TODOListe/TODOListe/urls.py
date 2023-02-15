@@ -26,6 +26,7 @@ urlpatterns = [
     path('logout/', task_views.logout, name="logout"),
     path('add_user/', task_views.add_user, name="add_user"),
     path('add_categorie/', task_views.add_categorie, name="add_categorie"),
+    path('delete_categorie/<int:categorie_pk>', task_views.delete_categorie, name="delete_categorie"),
     path('add_task/', task_views.add_task, name="add_task"),
     path('delete_task/<int:task_pk>', task_views.delete_task, name="delete_task"),
     path('get_task/<int:categorie_pk>', task_views.get_tasks, name="get_task"),

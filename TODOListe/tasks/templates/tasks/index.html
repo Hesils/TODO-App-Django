@@ -51,7 +51,7 @@
                     type="submit">Ajouter</button>
                 </form>
                 <div id="tasks-liste">
-                    {% include 'tasks/tasks.html' with tasks=tasks %}
+                    {% include 'tasks/tasks.html' with tasks=tasks categorie=active_categorie%}
                 </div>
             </div>
         </div>

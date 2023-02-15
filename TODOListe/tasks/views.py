@@ -14,6 +14,7 @@ def index(request):
     if categorie_pk:
         categorie = get_object_or_404(Categorie, pk=categorie_pk, user=User.objects.get(pk=context["user"]["pk"]))
     context['tasks'] = categorie.task_set.all()
+    context["active_categorie"] = categorie
     return render(request, 'tasks/index.html', context=context)
 
 """---------Categories views--------"""
@@ -25,6 +26,11 @@ def add_categorie(request):
     if not created:
         return HttpResponse("La categorie existe deja.", status=409)
     return render(request, 'tasks/categories.html', context={'categorie': categorie})
+
+def delete_categorie(request, categorie_pk):
+    categorie = get_object_or_404(Categorie, pk=categorie_pk)
+    categorie.delete()
+    return redirect('home')
 
 """---------Tasks views--------"""
 def add_task(request):
@@ -41,10 +47,9 @@ def add_task(request):
 def get_tasks(request, categorie_pk):
     categorie = get_object_or_404(Categorie, pk=categorie_pk)
     tasks = categorie.task_set.order_by("name")
-    return render(request, 'tasks/tasks.html', context={"tasks": tasks})
+    return render(request, 'tasks/tasks.html', context={"tasks": tasks, "categorie": categorie})
 
 def delete_task(request, task_pk):
-    print(request.POST)
     task = get_object_or_404(Task, pk=task_pk)
     task.delete()
     return HttpResponse("")
