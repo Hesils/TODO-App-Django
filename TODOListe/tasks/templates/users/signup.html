@@ -3,11 +3,39 @@
     <form class="d-flex flex-column gap-2" method='POST'>
         {%csrf_token%}
         <label for='user_name'>Nom d'utilisateur:</label>
-        <input class="form-control" type="text" name="user_name" require/>
+        <input
+            class="form-control {%if usernamemissing or usernameused %}is-invalid{%endif%}"
+            type="text"
+            name="user_name"
+            value=""
+            required/>
+        {%if usernamemissing %}
+        <div class="invalid-feedback">Nom d'utilisateur manquant</div>
+        {%endif%}
+        {%if usernameused %}
+        <div class="invalid-feedback">Nom d'utilisateur déja utilisé</div>
+        {%endif%}
         <label for='user_password'>Mot de passe:</label>
-        <input class="form-control" type="password" name="user_password" require/>
+        <input
+        class="form-control {%if passwordmissing %}is-invalid{%endif%}"
+        type="password"
+        name="user_password"
+        required/>
+        {%if passwordmissing %}
+        <div class="invalid-feedback">Mot de passe manquant</div>
+        {%endif%}
         <label for='user_mail'>Adresse mail:</label>
-        <input class="form-control" type="mail" name="user_mail" require/>
+        <input
+        class="form-control {%if emailmissing  or emailused%}is-invalid{%endif%}"
+        type="mail"
+        name="user_mail"
+        required/>
+        {%if emailmissing %}
+        <div class="invalid-feedback">Adresse mail manquante</div>
+        {%endif%}
+        {%if emailused %}
+        <div class="invalid-feedback">Adresse mail déja utilisée</div>
+        {%endif%}
         <button 
             class="btn btn-success"
             hx-post="{%url 'add_user' %}"

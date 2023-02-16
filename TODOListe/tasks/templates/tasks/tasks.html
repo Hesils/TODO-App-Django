@@ -1,7 +1,8 @@
 {% if categorie.name != "Defaut" %}
     <a
         class="btn btn-danger"
-        href="{% url 'delete_categorie' categorie.pk %}">Supprimer la catégorie</a>
+        href="{% url 'delete_categorie' categorie.pk %}"
+    >Supprimer la catégorie</a>
 {% endif %}
 {% for task in tasks %}
     {% include 'tasks/task.html' with task=task %}

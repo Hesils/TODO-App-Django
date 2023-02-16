@@ -1,7 +1,11 @@
 # TODO-App-Django
 
 # Bug to fix
-- [] Return alert if email in sign up form not unique
+- []  Sign up form
+    - [x] Return alert if email not unique
+    - [x] Return alert if username not unique
+    - [x] return alert if missing infos
+    - [] write in field user entries if error
 
 ## Models
 

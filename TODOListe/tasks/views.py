@@ -56,9 +56,22 @@ def delete_task(request, task_pk):
 """---------User views--------"""
 
 def login(request):
+    context = {}
     if 'user' in request.session:
         return redirect(index)
-    return render(request, "users/index.html", context={})
+    if 'usernameerror' in request.session:
+        context["usernameerror"] = True
+        del request.session['usernameerror']
+    if 'usernamemissing' in request.session:
+        context["usernamemissing"] = True
+        del request.session['usernamemissing']
+    if 'passwordmissing' in request.session:
+        context["passwordmissing"] = True
+        del request.session['passwordmissing']
+    if 'invalidcombinaison' in request.session:
+        context["invalidcombinaison"] = True
+        del request.session["invalidcombinaison"]
+    return render(request, "users/index.html", context=context)
 
 def logout(request):
     if 'user' in request.session:
@@ -66,11 +79,33 @@ def logout(request):
     return redirect('login_page')
 
 def sign_up(request):
-    return render(request, "users/signup.html", context={})
+    context = {}
+    if 'usernamemissing' in request.session:
+        context['usernamemissing'] = True
+        del request.session["usernamemissing"]
+    if 'passwordmissing' in request.session:
+        context['passwordmissing'] = True
+        del request.session["passwordmissing"]
+    if 'emailmissing' in request.session:
+        context['emailmissing'] = True
+        del request.session["emailmissing"]
+    if 'usernameused' in request.session:
+        context['usernameused'] = True
+        del request.session["usernameused"]
+    if 'emailused' in request.session:
+        context['emailused'] = True
+        del request.session["emailused"]
+    return render(request, "users/signup.html", context=context)
 
 def sign_in(request):
     username = request.POST.get("username")
     password = request.POST.get("password")
+    if username == "" or password == "":
+        if username == "":
+            request.session['usernamemissing'] = True
+        if password == "":
+            request.session['passwordmissing'] = True
+        return redirect(login)
     users = User.objects.all()
     user = None
     for obj in users:
@@ -79,13 +114,14 @@ def sign_in(request):
                 user = obj
                 break
             else:
-                return HttpResponse("Informations ne correspondent pas", status=409)
+                request.session["invalidcombinaison"] = True
+                return redirect(login)
     if not user:
-        return HttpResponse("Utilisateur inconnu", status=409)
+        request.session['usernameerror'] = True
+        return redirect(login)
     user_dict = {'username': user.username, 'pk': user.pk}
     request.session['user'] = user_dict
     return redirect(index)
-    # return render(request, "users/signup.html", context={})
 
 def add_user(request):
     user_name = request.POST.get("user_name")
@@ -93,9 +129,19 @@ def add_user(request):
     user_mail = request.POST.get("user_mail")
     users = User.objects.all()
     if user_name == "" or user_password == "" or user_mail == "":
-        return HttpResponse("Informations manquantes", status=409)
+        if user_name == "":
+            request.session["usernamemissing"] = True
+        if user_password == "":
+            request.session["passwordmissing"] = True
+        if user_mail == "":
+            request.session["emailmissing"] = True
+        return redirect(sign_up)
     for user in users:
         if user.username == user_name:
-            return HttpResponse("Ce nom d'utilisateur est déjà pris.", status=409)
+            request.session["usernameused"] = True
+            return redirect(sign_up)
+        elif user.email == user_mail:
+            request.session["emailused"] = True
+            return redirect(sign_up)
     User.objects.create(username=user_name, password=user_password, email=user_mail)
     return redirect(login)
