@@ -1,10 +1,14 @@
 <form method="POST">
     {% csrf_token %}
-    <h3>{{task.name}}</h3>
+    <div class="d-flex flex-row justify-content-between">
+        <h3>{{task.name}}</h3>
+        <button
+            class="btn btn-danger"
+            hx-post="{% url 'delete_task' task.pk %}"
+            hx-target="closest form"
+            hx-swap="outerHTML"
+            type="submit"
+        >-</button>
+    </div>
     <p>{{task.description}}</p>
-    <button hx-post="{% url 'delete_task' task.pk %}"
-        hx-target="closest form"
-        hx-swap="outerHTML"
-        type="submit"
-    >Supprimer</button>
 </form>

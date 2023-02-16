@@ -1,6 +1,7 @@
-<h2>Catégorie active : {{categorie.name}}</h2>
 {% if categorie.name != "Defaut" %}
-    <a href="{% url 'delete_categorie' categorie.pk %}">Supprimer la collection active</a>
+    <a
+        class="btn btn-danger"
+        href="{% url 'delete_categorie' categorie.pk %}">Supprimer la catégorie</a>
 {% endif %}
 {% for task in tasks %}
     {% include 'tasks/task.html' with task=task %}

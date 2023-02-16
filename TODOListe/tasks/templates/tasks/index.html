@@ -9,54 +9,60 @@
         <script src="https://unpkg.com/htmx.org@1.8.5"></script>
     </head>
     <body>
-        <div id="container" class="container border row">
-            <h1>TODO Liste</h1>
-            <nav class="col-4 border">
-                <div id="user-bar" class="d-flex justify-content-between gap-2">
-                    <h4>Bienvenu {{user.username}}</h4>
-                    <form method="POST">
+        <div id="container" class="container border">
+            <div class="row">
+                <h1>TODO Liste</h1>
+                <nav class="nav flex-column col-4 p-0">
+                    <div id="user-bar" class="row p-0 mb-2">
+                        <h4 class="col-12 col-lg-8">Bienvenu: {{user.username}}</h4>
+                        <form method="POST" class=" d-grid  col-lg-4">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-secondary"
+                                hx-post="{% url 'logout' %}" 
+                                hx-target="#container"
+                                type="submit"
+                            >Deconection</button>
+                        </form>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <h4>Catégories :</h4>
+                        <div id="categorie-liste" class="list-group" role="tablist">
+                            {% for categorie in categories%}
+                            {% include 'tasks/categories.html' with categorie=categorie active_categorie=active_categorie.pk%}
+                            {% endfor %}
+                        </div>
+                        <form method="POST" class="d-grid gap-1">
+                            {% csrf_token %}
+                            <input class="form-control" type="text" name="categorie_name" placeholder="Catégorie..."/>
+                            <button 
+                                class="btn btn-sm btn-success"
+                                hx-post="{% url 'add_categorie' %}"
+                                hx-target="#categorie-liste"
+                                hx-swap="beforeend"
+                                type="submit">Ajouter</button>
+                        </form>
+                    </div>
+                </nav>
+                <main id="tasks"  class="col-8 d-grid border p-3 gap-2">
+                    <h2>Taches :</h2>
+                    <form method="POST" class="row gap-1">
                         {% csrf_token %}
-                        <button class="btn btn-secondary"
-                            hx-post="{% url 'logout' %}" 
-                            hx-target="#container"
-                            type="submit"
-                        >Deconection</button>
-                    </form>
-                </div>
-                <form method="POST">
-                    {% csrf_token %}
-                    <input type="text" name="categorie_name" placeholder="Catégorie..."/>
-                    <button hx-post="{% url 'add_categorie' %}"
-                        hx-target="#categorie-liste"
-                        hx-swap="beforeend"
+                        <label for="task_name">Nom :</label>
+                        <input class="form-control" type="text" name="task_name" placeholder="Nom..."/>
+                        <label for="task_description">Description :</label>
+                        <textarea class="form-control" name="task_description" placeholder="Description..."/>
+                        <button class="btn btn-sm btn-success"
+                            hx-post="{% url 'add_task'%}"
+                            hx-target="#tasks-liste"
+                            hx-vals='js:{categorie: getCategorieFromURL()}'
+                            hx-swap="beforeend"
                         type="submit">Ajouter</button>
-                </form>
-                <div id="categorie-liste">
-                    <h2>Catégories :</h2>
-                    {% for categorie in categories%}
-                        {% include 'tasks/categories.html' with categorie=categorie%}
-                    {% endfor %}
-                </div>
-            </nav>
-            <main id="tasks"  class="col-4">
-                <h2>Taches :</h2>
-                <form method="POST">
-                    {% csrf_token %}
-                    <label for="task_name">Nom :</label>
-                    <input type="text" name="task_name" placeholder="Nom..."/>
-                    <label for="task_description">Description :</label>
-                    <input type="textfield" name="task_description" placeholder="Description..."/>
-                    <button 
-                        hx-post="{% url 'add_task'%}"
-                        hx-target="#tasks-liste"
-                        hx-vals='js:{categorie: getCategorieFromURL()}'
-                        hx-swap="beforeend"
-                    type="submit">Ajouter</button>
-                </form>
-                <section id="tasks-liste">
-                    {% include 'tasks/tasks.html' with tasks=tasks categorie=active_categorie%}
-                </section>
-            </main>
+                    </form>
+                    <section id="tasks-liste" class="d-grid gap-2">
+                        {% include 'tasks/tasks.html' with tasks=tasks categorie=active_categorie%}
+                    </section>
+                </main>
+            </div>
         </div>
 
         <script>

@@ -1,4 +1,6 @@
 <button
+class="list-group-item {% if active_categorie == categorie.pk %} active {% endif %}"
+data-bs-toggle="list"
 hx-get="{% url 'get_task' categorie.pk%}"
 hx-target="#tasks-liste"
 hx-push-url="?categorie_pk={{categorie.pk}}"
