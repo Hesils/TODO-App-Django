@@ -1,44 +1,15 @@
 # TODO-App-Django
 
-# Bug to fix
-- []  Sign up form
-    - [x] Return alert if email not unique
-    - [x] Return alert if username not unique
-    - [x] return alert if missing infos
-    - [] write in field user entries if error
+### Functionalities
+1. Create multiple acounts
+2. Login/Logout
+3. Create/Delete Categories
+4. Add/Delete Tasks to categories
 
-## Models
+### To run app
+- Install virtual environement
+- Go to TODOListe folder
+- install requirement with pip install -r requirement.txt
+- run server with python manage.py runserver
+- access to app at 127.0.0.1:8000 or localhost:8000
 
-- [x] Profil
-    - [x] name
-    - [x] password
-    - [x] email
-
-- [x] Catégories
-    - [x] name
-    - [x] slug
-    - [x] user-fk
-
-- [x] Taches
-    - [x] name
-    - [x] description
-    - [x] collection-fk
-    - [x] user-fk
-
-## Fonctionalités
-- [x] Utilisateur
-    - [x] Sign up
-    - [x] Connection
-    - [x] Déconnection
-    - [x] Récuperation des catégories/taches de l'utilisateur
-- [x] Taches
-    - [x] Ajouter une tache à une catégorie
-    - [x] Supprimer une tache
-- [x] Catégorie
-    - [x] Ajouter une catégorie
-        - [x] Impossible si catégorie éxiste déja
-    - [x] Supprimer une catégorie
-- [x] Affichage
-    - [x] Afficher la liste des catégories
-    - [x] Sélectionner une catégorie
-        - [x] Afficher la liste de taches dans la catégorie 
