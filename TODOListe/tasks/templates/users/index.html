@@ -18,6 +18,9 @@
                     class="form-control {% if usernameerror or usernamemissing %}is-invalid{%endif%}"
                     type="text"
                     name="username"
+                    {%if user_name%}
+                    value='{{user_name}}'
+                    {%endif%}
                     placeholder="Nom d'utilisateur"/>
                 {% if usernamemissing %}
                     <div class="invalid-feedback">Nom d'utilisateur manquant</div>
@@ -29,6 +32,9 @@
                     class="form-control {% if passwordmissing or invalidcombinaison %}is-invalid{%endif%}"
                     type="password"
                     name="password"
+                    {%if user_password%}
+                    value='{{user_password}}'
+                    {%endif%}
                     placeholder="Mot de passe"/>
                 {% if passwordmissing %}
                     <div class="invalid-feedback">Mot de passe manquant</div>

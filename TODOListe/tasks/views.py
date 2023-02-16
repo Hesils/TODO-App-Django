@@ -71,6 +71,12 @@ def login(request):
     if 'invalidcombinaison' in request.session:
         context["invalidcombinaison"] = True
         del request.session["invalidcombinaison"]
+    if 'user_name' in request.session:
+        context["user_name"] = request.session['user_name']
+        del request.session["user_name"]
+    if 'user_password' in request.session:
+        context["user_password"] = request.session['user_password']
+        del request.session["user_password"]
     return render(request, "users/index.html", context=context)
 
 def logout(request):
@@ -95,11 +101,22 @@ def sign_up(request):
     if 'emailused' in request.session:
         context['emailused'] = True
         del request.session["emailused"]
+    if 'user_name' in request.session:
+        context['user_name'] = request.session["user_name"]
+        del request.session["user_name"]
+    if 'user_password' in request.session:
+        context['user_password'] = request.session["user_password"]
+        del request.session["user_password"]
+    if 'user_mail' in request.session:
+        context['user_mail'] = request.session["user_mail"]
+        del request.session["user_mail"]
     return render(request, "users/signup.html", context=context)
 
 def sign_in(request):
     username = request.POST.get("username")
+    request.session['user_name'] = username
     password = request.POST.get("password")
+    request.session['user_password'] = password
     if username == "" or password == "":
         if username == "":
             request.session['usernamemissing'] = True
@@ -125,8 +142,11 @@ def sign_in(request):
 
 def add_user(request):
     user_name = request.POST.get("user_name")
+    request.session["user_name"] = user_name
     user_password = request.POST.get("user_password")
+    request.session["user_password"] = user_password
     user_mail = request.POST.get("user_mail")
+    request.session["user_mail"] = user_mail
     users = User.objects.all()
     if user_name == "" or user_password == "" or user_mail == "":
         if user_name == "":

@@ -7,7 +7,9 @@
             class="form-control {%if usernamemissing or usernameused %}is-invalid{%endif%}"
             type="text"
             name="user_name"
-            value=""
+            {%if user_name%}
+            value='{{user_name}}'
+            {%endif%}
             required/>
         {%if usernamemissing %}
         <div class="invalid-feedback">Nom d'utilisateur manquant</div>
@@ -17,10 +19,13 @@
         {%endif%}
         <label for='user_password'>Mot de passe:</label>
         <input
-        class="form-control {%if passwordmissing %}is-invalid{%endif%}"
-        type="password"
-        name="user_password"
-        required/>
+            class="form-control {%if passwordmissing %}is-invalid{%endif%}"
+            type="password"
+            name="user_password"
+            {%if user_password%}
+            value='{{user_password}}'
+            {%endif%}
+            required/>
         {%if passwordmissing %}
         <div class="invalid-feedback">Mot de passe manquant</div>
         {%endif%}
@@ -29,6 +34,9 @@
         class="form-control {%if emailmissing  or emailused%}is-invalid{%endif%}"
         type="mail"
         name="user_mail"
+        {%if user_mail%}
+        value='{{user_mail}}'
+        {%endif%}
         required/>
         {%if emailmissing %}
         <div class="invalid-feedback">Adresse mail manquante</div>
