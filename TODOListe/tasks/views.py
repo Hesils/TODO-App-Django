@@ -63,7 +63,7 @@ def login(request):
 def logout(request):
     if 'user' in request.session:
         del request.session['user']
-    return render(request, "users/index.html", context={})
+    return redirect('login_page')
 
 def sign_up(request):
     return render(request, "users/signup.html", context={})

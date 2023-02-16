@@ -9,9 +9,9 @@
         <script src="https://unpkg.com/htmx.org@1.8.5"></script>
     </head>
     <body>
-        <div id="container" class="container border">
+        <div id="container" class="container">
             <div class="row">
-                <h1>TODO Liste</h1>
+                <h1 class="text-center">TODO Liste</h1>
                 <nav class="nav flex-column col-4 p-0">
                     <div id="user-bar" class="row p-0 mb-2">
                         <h4 class="col-12 col-lg-8">Bienvenu: {{user.username}}</h4>
@@ -21,7 +21,7 @@
                                 hx-post="{% url 'logout' %}" 
                                 hx-target="#container"
                                 type="submit"
-                            >Deconection</button>
+                            >Déconnection</button>
                         </form>
                     </div>
                     <div class="d-grid gap-2">
@@ -43,7 +43,7 @@
                         </form>
                     </div>
                 </nav>
-                <main id="tasks"  class="col-8 d-grid border p-3 gap-2">
+                <main id="tasks"  class="col-8 d-grid p-3 gap-2">
                     <h2>Taches :</h2>
                     <form method="POST" class="row gap-1">
                         {% csrf_token %}

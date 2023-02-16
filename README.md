@@ -1,5 +1,7 @@
 # TODO-App-Django
 
+# Bug to fix
+- [] Return alert if email in sign up form not unique
 
 ## Models
 
